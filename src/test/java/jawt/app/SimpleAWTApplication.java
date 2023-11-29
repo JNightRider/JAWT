@@ -8,7 +8,6 @@ import jawt.app.jme3.JmeSimpleApp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,19 +102,12 @@ public class SimpleAWTApplication extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SimpleAWTApplication.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(SimpleAWTApplication.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(SimpleAWTApplication.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException |
+                 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             Logger.getLogger(SimpleAWTApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SimpleAWTApplication().setVisible(true);
-            }
+        EventQueue.invokeLater(() -> {
+            new SimpleAWTApplication().setVisible(true);
         });
     }
 
