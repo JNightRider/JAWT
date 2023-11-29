@@ -198,13 +198,16 @@ public class LwjglCanvas extends LwjglWindow implements JmeCanvasContext, Runnab
             return;
         }
 
-        glAWTCanvas.beforeRender();
+        try {
+            glAWTCanvas.beforeRender();
+            super.runLoop();
+            glAWTCanvas.swapBuffers();
 
-        super.runLoop();
-        glAWTCanvas.getPlatformGLCanvas()
-                   .swapBuffers();
-
-        glAWTCanvas.afterRender();
+            glAWTCanvas.afterRender();
+        } catch (Exception ex) {
+            listener.handleError("..", ex);
+        }
+        
         try {
             if (signalTerminate.tryAcquire(10, TimeUnit.MILLISECONDS)) {
                 glAWTCanvas.doDisposeCanvas();
