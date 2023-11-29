@@ -40,22 +40,16 @@ public class SimpleAWTApplication extends JFrame {
         jPanel2.setPreferredSize(new Dimension(534, 40));
 
         jButton1.setText("exit");
-        jButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (simpleApp != null) {
-                    simpleApp.stop();
-                    System.exit(0);
-                }
+        jButton1.addActionListener((ActionEvent actionEvent) -> {
+            if (simpleApp != null) {
+                simpleApp.stop();
+                System.exit(0);
             }
         });
 
         jButton2.setText("Load Scene3D");
-        jButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null, "USE >> setupJMEContext(true)");
-            }
+        jButton2.addActionListener((ActionEvent actionEvent) -> {
+            JOptionPane.showMessageDialog(null, "USE >> setupJMEContext(true)");
         });
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
@@ -86,7 +80,7 @@ public class SimpleAWTApplication extends JFrame {
         getContentPane().add(jPanel1, BorderLayout.CENTER);
 
         /* start jme3 */
-        setupJMEContext(true);
+        setupJMEContext(false);
 
         pack();
         setLocationRelativeTo(null);
