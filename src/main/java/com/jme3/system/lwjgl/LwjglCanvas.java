@@ -176,13 +176,13 @@ public class LwjglCanvas extends LwjglWindow implements JmeCanvasContext, Runnab
         synchronized (lock) {
             glAWTCanvas.deleteContext();
         }
-        // request the cleanup
-        signalTerminate.release();
-        try {
-            // wait until the thread is done with the cleanup
-            signalTerminated.acquire();
-        } catch (InterruptedException ignored) {
-        }
+        //// request the cleanup
+        //signalTerminate.release();
+        //try {
+        //    // wait until the thread is done with the cleanup
+        //    signalTerminated.acquire();
+        //} catch (InterruptedException ignored) {
+        //}
         super.destroyContext();
     }
 
