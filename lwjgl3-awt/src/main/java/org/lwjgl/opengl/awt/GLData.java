@@ -1,4 +1,4 @@
-package jawt.lwjgl.opengl.awt;
+package org.lwjgl.opengl.awt;
 
 /**
  * Contains all information to create an OpenGL context on an {@link AWTGLCanvas}.
@@ -153,43 +153,5 @@ public class GLData {
      * application in the system.
      */
     public boolean contextResetIsolation;
-
-    /**
-     * to-string
-     */
-    @Override
-    public String toString() {
-        return    " *  doubleBuffer=" + doubleBuffer + ",\n"
-                + " *  stereo=" + stereo + ",\n"
-                + " *  redSize=" + redSize + ",\n"
-                + " *  greenSize=" + greenSize + ",\n"
-                + " *  blueSize=" + blueSize + ",\n"
-                + " *  alphaSize=" + alphaSize + ",\n"
-                + " *  depthSize=" + depthSize + ",\n"
-                + " *  stencilSize=" + stencilSize + ",\n"
-                + " *  accumRedSize=" + accumRedSize + ",\n"
-                + " *  accumGreenSize=" + accumGreenSize + ",\n"
-                + " *  accumBlueSize=" + accumBlueSize + ",\n"
-                + " *  accumAlphaSize=" + accumAlphaSize + ",\n"
-                + " *  sampleBuffers=" + sampleBuffers + ",\n"
-                + " *  samples=" + samples + ",\n"
-                + " *  shareContext=" + shareContext + ",\n"
-                + " *  majorVersion=" + majorVersion + ",\n"
-                + " *  minorVersion=" + minorVersion + ",\n"
-                + " *  forwardCompatible=" + forwardCompatible + ",\n"
-                + " *  profile=" + profile + ",\n"
-                + " *  api=" + api + ",\n"
-                + " *  debug=" + debug + ",\n"
-                + " *  swapInterval=" + swapInterval + ",\n"
-                + " *  sRGB=" + sRGB + ",\n"
-                + " *  pixelFormatFloat=" + pixelFormatFloat + ",\n"
-                + " *  contextReleaseBehavior=" + contextReleaseBehavior + ",\n"
-                + " *  colorSamplesNV=" + colorSamplesNV + ",\n"
-                + " *  swapGroupNV=" + swapGroupNV + ",\n"
-                + " *  swapBarrierNV=" + swapBarrierNV + ",\n"
-                + " *  robustness=" + robustness + ",\n"
-                + " *  loseContextOnReset=" + loseContextOnReset + ",\n"
-                + " *  contextResetIsolation=" + contextResetIsolation;
-    }
 
 }

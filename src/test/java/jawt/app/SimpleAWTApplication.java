@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class SimpleAWTApplication extends JFrame {
 
     private SimpleApplication simpleApp;
+    private Canvas canvas;
 
     public SimpleAWTApplication() {
         initComponents();
@@ -38,17 +39,16 @@ public class SimpleAWTApplication extends JFrame {
         jPanel1.setLayout(new BorderLayout());
         jPanel2.setPreferredSize(new Dimension(534, 40));
 
-        jButton1.setText("exit");
+        jButton1.setText("Add");
         jButton1.addActionListener((ActionEvent actionEvent) -> {
-            if (simpleApp != null) {
-                simpleApp.stop();
-                System.exit(0);
-            }
+            jPanel3.add(canvas, BorderLayout.CENTER);
+            JOptionPane.showMessageDialog(null, "add(canvas): ok!");
         });
 
-        jButton2.setText("Load Scene3D");
+        jButton2.setText("Remove");
         jButton2.addActionListener((ActionEvent actionEvent) -> {
-            JOptionPane.showMessageDialog(null, "USE >> setupJMEContext(true)");
+            jPanel3.remove(canvas);
+            JOptionPane.showMessageDialog(null, "remove(canvas): ok!");
         });
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
@@ -90,7 +90,8 @@ public class SimpleAWTApplication extends JFrame {
         simpleApp.createCanvas();
         simpleApp.startCanvas();
 
-        Canvas canvas = ((JmeCanvasContext) simpleApp.getContext()).getCanvas();
+        canvas = ((JmeCanvasContext) simpleApp.getContext()).getCanvas();
+        canvas.setPreferredSize(new Dimension(1024, 576));
         jPanel3.add(canvas, BorderLayout.CENTER);
     }
 

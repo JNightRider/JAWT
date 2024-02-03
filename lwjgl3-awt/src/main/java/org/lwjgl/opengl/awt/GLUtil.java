@@ -1,4 +1,6 @@
-package jawt.lwjgl.opengl.awt;
+package org.lwjgl.opengl.awt;
+
+import org.lwjgl.opengl.awt.GLData.API;
 
 class GLUtil {
     
@@ -59,10 +61,10 @@ class GLUtil {
         if (attribs.api == null) {
             throw new IllegalArgumentException("Unspecified client API");
         }
-        if (attribs.api == GLData.API.GL && !validVersionGL(attribs.majorVersion, attribs.minorVersion)) {
+        if (attribs.api == API.GL && !validVersionGL(attribs.majorVersion, attribs.minorVersion)) {
             throw new IllegalArgumentException("Invalid OpenGL version");
         }
-        if (attribs.api == GLData.API.GLES && !validVersionGLES(attribs.majorVersion, attribs.minorVersion)) {
+        if (attribs.api == API.GLES && !validVersionGLES(attribs.majorVersion, attribs.minorVersion)) {
             throw new IllegalArgumentException("Invalid OpenGL ES version");
         }
         if (!attribs.doubleBuffer && attribs.swapInterval != null) {

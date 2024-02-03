@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.lwjgl.opengl.awt'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
+    implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
+
+    implementation 'org.jmonkeyengine:jme3-lwjgl3:' + jmonkeyengineVersion    
+    implementation 'org.lwjgl:lwjgl-jawt:' + lwjgl3Version
+}
+
+test {
+    useJUnitPlatform()
+}

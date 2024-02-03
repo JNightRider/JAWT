@@ -1,8 +1,8 @@
-package jawt.lwjgl.opengl.awt;
+package org.lwjgl.opengl.awt;
 
-import jawt.lwjgl.awt.MacOSX;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.awt.MacOSX;
 import org.lwjgl.system.JNI;
 import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.jawt.JAWT;

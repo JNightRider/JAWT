@@ -1,4 +1,4 @@
-package jawt.lwjgl.awthacks;
+package org.lwjgl.awthacks;
 
 import java.awt.Color;
 import java.awt.Composite;

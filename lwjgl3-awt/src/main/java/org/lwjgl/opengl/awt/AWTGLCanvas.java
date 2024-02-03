@@ -1,7 +1,7 @@
-package jawt.lwjgl.opengl.awt;
+package org.lwjgl.opengl.awt;
 
-import jawt.lwjgl.awthacks.NonClearGraphics;
-import jawt.lwjgl.awthacks.NonClearGraphics2D;
+import org.lwjgl.awthacks.NonClearGraphics;
+import org.lwjgl.awthacks.NonClearGraphics2D;
 import org.lwjgl.system.Platform;
 
 import java.awt.*;
@@ -9,8 +9,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * An AWT {@link Canvas} that supports to be drawn on using OpenGL.
@@ -19,8 +17,6 @@ import java.util.logging.Logger;
  */
 public abstract class AWTGLCanvas extends Canvas {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = Logger.getLogger(AWTGLCanvas.class.getName());
-
     protected PlatformGLCanvas platformCanvas = createPlatformCanvas();
 
     private static PlatformGLCanvas createPlatformCanvas() {
@@ -37,28 +33,10 @@ public abstract class AWTGLCanvas extends Canvas {
     }
 
     protected long context;
-    protected GLData data;
+    protected final GLData data;
     protected final GLData effective = new GLData();
     protected boolean initCalled;
     private int framebufferWidth, framebufferHeight;
-    
-    protected AWTGLCanvas(GLData data) {
-        this.data = data;
-        AWTGLCanvas.this.addComponentListener(listener);
-    }
-
-    protected AWTGLCanvas() {
-        this(new GLData());
-    }
-    
-    public void glAwtInfor() {
-        LOGGER.log(Level.INFO, "AWTGLCanvas init():\n  * PlatformGLCanvas={0}\n{1}", new Object[]{Platform.get(), data.toString()});
-    }
-
-    public synchronized void setData(GLData data) {
-        this.data = data;
-    }
-    
     private final ComponentListener listener = new ComponentAdapter() {
         @Override
         public void componentResized(ComponentEvent e) {
@@ -84,18 +62,18 @@ public abstract class AWTGLCanvas extends Canvas {
     }
 
     public void disposeCanvas() {
-        this.doDisposeCanvas();
-    }
-
-    public void doDisposeCanvas() {
         this.platformCanvas.dispose();
     }
-
-    public PlatformGLCanvas getPlatformGLCanvas() {
-        return platformCanvas;
+    protected AWTGLCanvas(GLData data) {
+        this.data = data;
+        this.addComponentListener(listener);
     }
 
-    public void beforeRender() {
+    protected AWTGLCanvas() {
+        this(new GLData());
+    }
+
+    protected void beforeRender() {
         if (context == 0L) {
             try {
                 context = platformCanvas.create(this, data, effective);
@@ -111,7 +89,7 @@ public abstract class AWTGLCanvas extends Canvas {
         platformCanvas.makeCurrent(context);
     }
 
-    public void afterRender() {
+    protected void afterRender() {
         platformCanvas.makeCurrent(0L);
         try {
             platformCanvas.unlock(); // <- MUST unlock on Linux
@@ -138,25 +116,28 @@ public abstract class AWTGLCanvas extends Canvas {
         }
     }
 
-    //public void initGL() {}
-    //public void paintGL() {}
-    
-    //public void render() {
-    //    beforeRender();
-    //    try {
-    //        if (!initCalled) {
-    //            initGL();
-    //            initCalled = true;
-    //        }
-    //        paintGL();
-    //    } finally {
-    //        afterRender();
-    //    }
-    //}
-
-    public void deleteContext() {
-        platformCanvas.deleteContext(context);
+    public void render() {
+        beforeRender();
+        try {
+            if (!initCalled) {
+                initGL();
+                initCalled = true;
+            }
+            paintGL();
+        } finally {
+            afterRender();
+        }
     }
+
+    /**
+     * Will be called once after the OpenGL has been created.
+     */
+    public abstract void initGL();
+
+    /**
+     * Will be called whenever the {@link Canvas} needs to paint itself.
+     */
+    public abstract void paintGL();
 
     public int getFramebufferWidth() {
         return framebufferWidth;

@@ -31,6 +31,5 @@ public class JmeSimpleApp extends SimpleApplication  {
     public void simpleUpdate(float tpf) {
         float speed = FastMath.PI/2;
         geom.rotate(0, tpf * speed, 0);
-        geom = null;
     }
 }

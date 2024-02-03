@@ -1,4 +1,4 @@
-package jawt.lwjgl.opengl.awt;
+package org.lwjgl.opengl.awt;
 
 import java.awt.AWTException;
 import java.awt.Canvas;

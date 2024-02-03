@@ -1,4 +1,4 @@
-package jawt.lwjgl.awt;
+package org.lwjgl.awt;
 
 import org.lwjgl.system.JNI;
 import org.lwjgl.system.macosx.ObjCRuntime;
